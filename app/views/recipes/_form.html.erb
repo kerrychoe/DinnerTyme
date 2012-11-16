@@ -1,0 +1,54 @@
+<%= form_for(@recipe) do |f| %>
+  <% if @recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+      <ul>
+      <% @recipe.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :kitchen_id %>
+    <%= f.select :kitchen_id, Kitchen.all.map{|k| [k.name, k.id]}, {:prompt=>"Pick a kitchen"} %>
+  </div>  
+  
+  <div class="field">
+  	Ingredients:
+  	<p>
+	  <% Ingredient.all.each do |ingredient| %>
+	    <%= ingredient.name %>
+	    <%= check_box_tag 'recipe[ingredient_ids][]', ingredient.id, @recipe.ingredients.include?(ingredient) %>
+	  <% end %>  
+	<p>
+  </div>
+  
+  <div class="field">
+    <%= f.label :steps %>
+    <%= f.text_area :steps %>
+  </div>
+  <div class="field">
+    <%= f.label :photo %>
+    <%= f.text_field :photo %>
+  </div>
+  <div class="field">
+    <%= f.label :serves %>
+    <%= f.number_field :serves %>
+  </div>
+  <div class="field">
+    <%= f.label :rating %>
+    <%= f.number_field :rating %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

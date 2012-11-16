@@ -1,0 +1,17 @@
+<h1>Ingredients</h1>
+
+<div class="wrapper">
+	
+	<% @ingredients.each do |ingredient| %>
+	    Name: <%= ingredient.name %><br>
+	    Unit: <%= ingredient.unit %><br>
+	    Amount: <%= ingredient.amount %><br>
+	    <%= link_to 'Show', ingredient %>
+	    <%= link_to 'Edit', edit_ingredient_path(ingredient) %>
+	    <%= link_to 'Destroy', ingredient, method: :delete, data: { confirm: 'Are you sure?' } %>
+		<br><br>
+	<% end %>
+	
+</div>
+
+<%= link_to 'New Ingredient', new_ingredient_path %>

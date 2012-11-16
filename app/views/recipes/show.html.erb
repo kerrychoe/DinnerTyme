@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @recipe.name %>
+</p>
+
+<p>
+  <b>Kitchen:</b>
+  <%= @recipe.kitchen.name %>
+</p>
+
+<p>
+  <b>Ingredients:</b>
+  <% Ingredient.all.each do |ingredient| %>
+	<%= ingredient.name %>
+	<%= check_box_tag 'recipe[ingredient_ids][]', ingredient.id, @recipe.ingredients.include?(ingredient) %>
+  <% end %>  
+</p>
+
+<p>
+  <b>Steps:</b>
+  <%= @recipe.steps %>
+</p>
+
+<p>
+  <b>Photo:</b>
+  <%= @recipe.photo %>
+</p>
+
+<p>
+  <b>Serves:</b>
+  <%= @recipe.serves %>
+</p>
+
+<p>
+  <b>Rating:</b>
+  <%= @recipe.rating %>
+</p>
+
+
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<%= link_to 'Back', recipes_path %>
